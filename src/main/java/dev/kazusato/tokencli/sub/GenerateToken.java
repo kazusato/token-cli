@@ -9,6 +9,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 
 @CommandLine.Command(name = "generate")
@@ -44,7 +45,7 @@ public class GenerateToken implements Runnable {
             while ((len = bis.read(buf)) > 0) {
                 baos.write(buf, 0, len);
             }
-            return baos.toByteArray();
+            return Base64.getDecoder().decode(baos.toByteArray());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
